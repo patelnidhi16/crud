@@ -34,9 +34,6 @@
 	</style>
 </head>
 
-
-
-
 <body>
 	
 	<form method="POST" id="form">
