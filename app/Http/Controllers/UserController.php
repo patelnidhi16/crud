@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use DB;
+use LDAP\Result;
 
 class UserController extends Controller
 {
@@ -15,25 +16,33 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'name' => 'required|alpha',
-            'emil' => 'required|unique:students',
+    $request->validate([
+        'name' => 'required|alpha',
+        'image' => 'required',
+        'emil' => 'required|unique:students',
+            'mobile' => 'numeric|required|digits:10',
             'city' => 'required',
             'address' => 'required',
             'gender' => 'required',
-
         ]);
+            $detail = $request->file('image');
+            $name_of_image = $detail->getClientOriginalName();
+            $detail->storeAs('public/', $name_of_image);
 
         Student::insert([
             'name' => $request->name,
+            'image' => $name_of_image,
             'emil' => $request->emil,
+            'mobile' => $request->mobile,
             'city' => $request->city,
             'address' => $request->address,
             'gender' => $request->gender,
-            'hobbie'=>implode(',',$request->hobbie)
-          
-        ]);        $data = Student::all();
+            'hobbie' => implode(',', $request->hobbie)
+
+        ]);
+       
+        $data = Student::all();
+        
         return $data;
     }
 
@@ -48,7 +57,7 @@ class UserController extends Controller
     }
 
     public function edit(Request $request)
-    {
+    { 
         $id = $request->id;
         $edit_data = Student::find($id);
         return $edit_data;
@@ -56,33 +65,37 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        // dd($name_of_update_image);
+        
         $result['status'] = false;
         $id = $request->id;
         $request->validate([
-            'update_name'=>'required|alpha',
-            'update_email'=>'required',
-            'update_city'=>'required',
-            'update_address'=>'required',
-            'gender'=>'update_gender',
+            'update_name' => 'required|alpha',
+            'update_image' => 'required',
+            'update_email' => 'required',
+            'update_mobile' => 'numeric|required|digits:10|',
+            'update_city' => 'required',
+            'update_address' => 'required',
+            'update_gender' => 'required',
         ]);
-    
+        $detail = $request->file('update_image');
+        $name_of_update_image = $detail->getClientOriginalName();
+        $detail->storeAs('public/', $name_of_update_image);
+        //   dd($name_of_update_image);
         Student::where("id", $id)->update([
             "name" => $request->update_name,
+            "image" => $name_of_update_image,
             "emil" => $request->update_email,
+            "mobile" => $request->update_mobile,
             "city" => $request->update_city,
             "address" => $request->update_address,
             "gender" => $request->update_gender,
-            "hobbie" =>  implode(',',$request->updatehobbie)
+            "hobbie" =>  implode(',', $request->updatehobbie)
         ]);
         $result['status'] = true;
         $data = Student::all();
         $result['data'] = $data;
+        // dd($data);
         return $result;
-    }
-
-    public function search(Request $request){
-        // dd($request->all());
-        $data = Student::all();
-
     }
 }

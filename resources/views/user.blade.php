@@ -37,110 +37,119 @@
 <body>
 
 	<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#insert">Insert
-</button>
+	<button type="button" class="btn btn-primary float-right mx-2 my-2" data-toggle="modal" data-target="#insert">Insert
+	</button>
 
-<!-- Modal -->
-<div class="modal fade" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        
-    
-	
-	<form method="POST" id="form">
-		@csrf
-		<div class="form-group mx-3">
-
-			<label for="name">Name:</label>
-			<input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="nidhi" name="name" value="{{old('name')}}">
-			<span class="mx-3 error_empty"></span>
-		</div>
-		<div class="form-group mx-3">
-			<label for="email">Email:</label>
-			<input type="email" class="user form-control" id="email" placeholder="name@example.com" name="emil" value="{{old('emil')}}">
-			<span class="mx-3 error_empty"></span>
-		</div>
-		<div class="form-group mx-3">
-			<label for="city">City</label>
-			<select class="user form-control" id="city" name="city">
-				<option value="" {{ old('city') == '' ? "selected" : "" }}>Select City</option>
-				<option value="1" {{ old('city') == '1' ? "selected" : "" }}>1</option>
-				<option value="2" {{ old('city') == '2' ? "selected" : "" }}>2</option>
-				<option value="3" {{ old('city') == '3' ? "selected" : "" }}>3</option>
-				<option value="4" {{ old('city') == '4' ? "selected" : "" }}>4</option>
-				<option value="5" {{ old('city') == '5' ? "selected" : "" }}>5</option>
-			</select>
-		
-		</div>
-		<div class="form-group mx-3">
-			<label for="address">Address</label>
-			<textarea class="user form-control" id="address" name="address">{{old('address')}}</textarea>
-			<span class="error_empty"></span>
-		</div>
-		<div class="form-group mx-3">
-			<label for="gender">Gender</label><br>
-			<input type="radio" name="gender" class="radio-button" id='gender' @if(old('gender')) checked @endif value="male">male
-			<input type="radio" name="gender" class="radio-button" id='gender' @if(old('gender')) checked @endif value="female">female
-
-		</div>
-		<span class="gender mx-3 "></span>
-		@error('gender') <span>{{$message}}</span>@enderror
-
-
-
-		<div class="mx-3">
-			<lable>Hobbie:</lable>
-			<div class="row">
-				<div class="form-check mx-3 col-1">
-					<input class="form-check-input" type="checkbox" value="Reading" id="hobbie" name="hobbie[]" @if(old('hobbie')) checked @endif>
-					<label class="form-check-label" for="hobbie">
-						Reading
-					</label>
+	<!-- Modal -->
+	<div class="modal fade" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
+				<div class="modal-body">
 
-				<div class="form-check mx-3 col-2">
-					<input class="form-check-input" type="checkbox" value="Dancing" id="hobbie" name="hobbie[]" @if(old('hobbie')) checked @endif>
-					<label class="form-check-label" for="hobbie">
-						Dancing
-					</label>
+
+					<form method="POST" id="form" enctype="multipart/form-data">
+						@csrf
+						<div class="form-group mx-3">
+
+							<label for="name">Name:</label>
+							<input type="text" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="nidhi" name="name" value="{{old('name')}}">
+							<span class="mx-3 error_empty"></span>
+						</div>
+						<div class="form-group mx-3">
+
+							<label for="image">image:</label>
+							<input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" value="{{old('image')}}">
+							<span class=" mx-3 error_empty"></span>
+						</div>
+						<div class="form-group mx-3">
+							<label for="email">Email:</label>
+							<input type="email" class="user form-control" id="email" placeholder="name@example.com" name="emil" value="{{old('emil')}}">
+							<span class="mx-3 error_empty"></span>
+						</div>
+						<div class="form-group mx-3">
+							<label for="mobile">Mobile:</label>
+							<input type="mobile" class="user form-control" id="mobile" placeholder="1234567890" name="mobile" value="{{old('mobile')}}">
+							<span class="mx-3 error_empty"></span>
+						</div>
+						<div class="form-group mx-3">
+							<label for="city">City</label>
+							<select class="user form-control" id="city" name="city">
+								<option value="" {{ old('city') == '' ? "selected" : "" }}>Select City</option>
+								<option value="1" {{ old('city') == 'billimora' ? "selected" : "" }} >billimora</option>
+								<option value="2" {{ old('city') == 'surat' ? "selected" : "" }}>surat</option>
+								<option value="3" {{ old('city') == 'dahod' ? "selected" : "" }}>dahod</option>
+								<option value="4" {{ old('city') == 'navsari' ? "selected" : "" }}>navsari</option>
+								<option value="5" {{ old('city') == 'valsad' ? "selected" : "" }}>valsad</option>
+							</select>
+
+						</div>
+						<div class="form-group mx-3">
+							<label for="address">Address</label>
+							<textarea class="user form-control" id="address" name="address">{{old('address')}}</textarea>
+							<span class="error_empty"></span>
+						</div>
+						<div class="form-group mx-3">
+							<label for="gender">Gender</label><br>
+							<input type="radio" name="gender" class="radio-button" id='gender' @if(old('gender')) checked @endif value="male" >male
+							<input type="radio" name="gender" class="radio-button" id='gender' @if(old('gender')) checked @endif value="female">female
+
+						</div>
+						<span class="gender mx-3 "></span>
+						@error('gender') <span>{{$message}}</span>@enderror
+
+
+						<div class="mx-3">
+							<lable>Hobbie:</lable>
+							<div class="row">
+								<div class="form-check mx-3 ">
+									<input class="form-check-input" type="checkbox" value="Reading" id="hobbie" name="hobbie[]" @if(old('hobbie')) checked @endif>
+									<label class="form-check-label" for="hobbie">
+										Reading
+									</label>
+								</div>
+
+								<div class="form-check mx-3">
+									<input class="form-check-input" type="checkbox" value="Dancing" id="hobbie" name="hobbie[]"  @if(old('hobbie')) checked @endif>
+									<label class="form-check-label" for="hobbie">
+										Dancing
+									</label>
+								</div>
+								<div class="form-check mx-3 ">
+									<input class="form-check-input" type="checkbox" value="Singing" id="hobbie" name="hobbie[]" @if(old('hobbie')) checked @endif>
+									<label class="form-check-label" for="hobbie">
+										Singing
+									</label>
+								</div>
+							</div>
+							<span class="hobbie mx-3"><span>
+									<span class="mx-3"></span>
+						</div>
+						<button type="submit" class="btn btn-success mx-3 mt-2" id="insert_submit">Submit</button>
+					</form>
 				</div>
-				<div class="form-check mx-3 col-3">
-					<input class="form-check-input" type="checkbox" value="Singing" id="hobbie" name="hobbie[]" @if(old('hobbie')) checked @endif>
-					<label class="form-check-label" for="hobbie">
-						Singing
-					</label>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
 				</div>
 			</div>
-			<span class="hobbie mx-3"><span>
-					@error('hobbie') <span class="mx-3">{{$message}}</span>@enderror
 		</div>
-		<button type="submit" class="btn btn-success mx-3 mt-2" id="insert_submit">Submit</button>
-	</form>
 	</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-	<div class="row mx-3 my-3">
-		<input type="text" class="form-control col-2" placeholder="search here" id="search">
-	</div>
+
 
 	<table class="table mx-3 ">
 		<tr>
 			<td>Id</td>
 			<td>Name</td>
+			<td>Image</td>
 			<td>Email</td>
+			<td>Mobile</td>
 			<td>City</td>
 			<td>Address</td>
 			<td>Gender</td>
@@ -151,12 +160,14 @@
 		<tr>
 			<td>{{$user->id}}</td>
 			<td>{{$user->name}}</td>
+			<td><img src="{{asset('/storage/'.$user->image)}}" height="50px"></img></td>
 			<td>{{$user->emil}}</td>
+			<td>{{$user->mobile}}</td>
 			<td>{{$user->city}}</td>
 			<td>{{$user->address}}</td>
 			<td>{{$user->gender}}</td>
 			<td>{{$user->hobbie}}</td>
-			<td><button type='submit' class='delete btn btn-danger' dataid="{{$user->id}}">Delete</button><button type='button' dataid='{{$user->id}}' class='update btn btn-success' data-toggle='modal' data-target='#exampleModal'>Update</button></td>
+			<td><button type='submit' class='delete btn btn-danger' dataid="{{$user->id}}">Delete</button>&nbsp;<button type='button' dataid='{{$user->id}}' class='update btn btn-success' data-toggle='modal' data-target='#exampleModal'>Update</button></td>
 		</tr>
 		@endforeach
 
@@ -180,20 +191,30 @@
 							<input type="text" class="form-control @error('update_name') is-invalid @enderror" id="update_name" placeholder="update_name@example.com" name="update_name" value="{{old('update_name')}}">
 							<span></span>
 						</div>
+						<div class="form-group mx-3">
+							<label for="update_image">update_image:</label>
+							<input type="file" class="form-control @error('update_image') is-invalid @enderror" id="update_image" name="update_image" value="{{old('update_image')}}">
+							<span class=" mx-3 error_empty"></span>
+						</div>
 						<div class="form-group">
 							<label for="update_email">Email:</label>
-							<input type="email" class="user form-control" id="update_email" placeholder="name@example.com" name="update_email" value="{{old('update_email')}}">
-							
+							<input type="email" class="user form-control" id="update_email" placeholder="name@example.com" name="update_email">
+							<span></span>
+						</div>
+						<div class="form-group">
+							<label for="update_mobile">Mobile:</label>
+							<input type="text" class="user form-control" id="update_mobile" placeholder="1234567890" name="update_mobile">
+							<span></span>
 						</div>
 						<div class="form-group">
 							<label for="update_city">City</label>
 							<select class="user form-control" id="update_city" name="update_city">
 								<option value="" {{ old('update_city') == '' ? "selected" : "" }}>Select City</option>
-								<option value="1" {{ old('update_city') == '1' ? "selected" : "" }}>1</option>
-								<option value="2" {{ old('update_city') == '2' ? "selected" : "" }}>2</option>
-								<option value="3" {{ old('update_city') == '3' ? "selected" : "" }}>3</option>
-								<option value="4" {{ old('update_city') == '4' ? "selected" : "" }}>4</option>
-								<option value="5" {{ old('update_city') == '5' ? "selected" : "" }}>5</option>
+								<option value="1" {{ old('update_city') == 'billimora' ? "selected" : "" }}>billimora</option>
+								<option value="2" {{ old('update_city') == 'surat' ? "selected" : "" }}>surat</option>
+								<option value="3" {{ old('update_city') == 'dahod' ? "selected" : "" }}>dahod</option>
+								<option value="4" {{ old('update_city') == 'navsari' ? "selected" : "" }}>navsari</option>
+								<option value="5" {{ old('update_city') == 'valsad' ? "selected" : "" }}>valsad</option>
 							</select>
 							@error('update_city') <span>{{$message}}</span>@enderror
 						</div>
@@ -251,6 +272,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$('#form').validate({
 
@@ -259,9 +281,15 @@
 					required: true,
 
 				},
+				image: {
+					required: true,
+				},
 				emil: {
 					required: true,
 					email: true
+				},
+				mobile: {
+					required: true,
 				},
 				city: {
 					required: true,
@@ -281,7 +309,6 @@
 				if (element.attr("name") == "gender") {
 					error.appendTo(".gender");
 				}
-
 			},
 			highlight: function(element, errorClass, validClass) {
 				$(element).addClass('is-invalid');
@@ -300,24 +327,23 @@
 					processData: false,
 					contentType: false,
 					success: function(data) {
-						
+						console.log(data);
 						var display = "";
 						$.each(data, function(key, value) {
-							
-							display += "<tr><td>" + value.id + "</td><td>" + value.name + "</td><td>" + value.emil + "</td><td>" + value.city + "</td><td>" + value.address + "</td><td>" + value.gender + "</td><td>" + value.hobbie + "</td><td><button type='button' class=' delete btn btn-danger'  dataid='" + value.id + "'>Delete</button><button type='button' dataid='" + value.id + "' class='update btn btn-success' data-toggle='modal' data-target='#exampleModal'>Update</button></td></tr>";
-						});
 
-						window.location.reload();
+							display += "<tr><td>" + value.id + "</td><td>" + value.name + "</td><td><img src='/storage/" + value.image + "' height='50px'></img></td><td>" + value.image + "</td><td>" + value.emil + "</td><td>" + value.mobile + "</td><td>" + "</td><td>" + value.city + "</td><td>" + value.address + "</td><td>" + value.gender + "</td><td>" + value.hobbie + "</td><td><button type='button' class=' delete btn btn-danger'  dataid='" + value.id + "'>Delete</button>&nbsp;<button type='button' dataid='" + value.id + "' class='update btn btn-success' data-toggle='modal' data-target='#exampleModal'>Update</button></td></tr>";
+						});
+						// $('#insert').hide();
+						alert("data inserted sucessfully");
+
 						$('.table').html(display);
+						window.location.reload();
 					},
 					error: function(data) {
-
 						var errors = $.parseJSON(data.responseText);
-
 						$.each(errors.errors, function(key, value) {
 							console.log(key);
 							console.log(value);
-							// $('#form').find('input[name=' + key + ']').html(value);
 							$('#form').find('[name=' + key + ']').next('span').html(value[0]);
 						});
 					}
@@ -340,9 +366,10 @@
 				success: function(data) {
 					var display = "";
 					$.each(data, function(key, value) {
-						display += "<tr><td>" + value.id + "</td><td>" + value.name + "</td><td>" + value.emil + "</td><td>" + value.city + "</td><td>" + value.address + "</td><td>" + value.gender + "</td><td>" + value.hobbie + "</td><td><button type='button' class='delete btn btn-danger'  dataid='" + value.id + "'>Delete</button><button type='button' dataid='" + value.id + "' class='update btn btn-success'>Update</button></td></tr>";
 
+						display += "<tr><td>" + value.id + "</td><td>" + value.name + "</td><td><img src='/storage/" + value.image + "' height='50px'></img></td><td>" + value.image + "</td><td>" + value.emil + "</td><td>" + value.mobile + "</td><td>" + "</td><td>" + value.city + "</td><td>" + value.address + "</td><td>" + value.gender + "</td><td>" + value.hobbie + "</td><td><button type='button' class=' delete btn btn-danger'  dataid='" + value.id + "'>Delete</button>&nbsp;<button type='button' dataid='" + value.id + "' class='update btn btn-success' data-toggle='modal' data-target='#exampleModal'>Update</button></td></tr>";
 					});
+					alert("data deleted sucessfully");
 					$('.table').html(display);
 				}
 			});
@@ -362,7 +389,7 @@
 
 				},
 				success: function(data) {
-					console.log()
+					//  console.log(data.image);
 					var hobbie_array = data.hobbie.split(',');
 					for (i = 0; i < hobbie_array.length; i++) {
 						$('.hobbieupdate').each(function() {
@@ -375,11 +402,11 @@
 
 					$('.id').val(data.id);
 					$('#update_name').val(data.name);
-					// alert( $('#update_name').val());
 					$('#update_email').val(data.emil);
+					$('#update_image').val(data.image);
+					$('#update_mobile').val(data.mobile);
 					$('#update_address').val(data.address);
 					$('#update_gender').attr('checked', true);
-
 					$('#update_city').val(data.city);
 
 				}
@@ -392,9 +419,16 @@
 				update_name: {
 					required: true,
 				},
+				update_image: {
+					required: true,
+				},
 				update_email: {
 					required: true,
 					email: true
+				},
+				update_mobile: {
+					required: true,
+
 				},
 				update_city: {
 					required: true,
@@ -438,16 +472,17 @@
 							$('#exampleModal').hide();
 						}
 						var display = "";
-						$.each(data.data, function(key, value) {
-							display += "<tr><td>" + value.id + "</td><td>" + value.name + "</td><td>" + value.emil + "</td><td>" + value.city + "</td><td>" + value.address + "</td><td>" + value.gender + "</td><td>" + value.hobbie + "</td><td><button type='button' class='delete btn btn-danger'  dataid='" + value.id + "'>Delete</button><button type='button' dataid='" + value.id + "' class='update btn btn-success'>Update</button></td></tr>";
+						$.each(data, function(key, value) {
 
+							display += "<tr><td>" + value.id + "</td><td>" + value.name + "</td><td><img src='/storage/" + value.image + "' height='50px'></img></td><td>" + value.image + "</td><td>" + value.emil + "</td><td>" + value.mobile + "</td><td>" + "</td><td>" + value.city + "</td><td>" + value.address + "</td><td>" + value.gender + "</td><td>" + value.hobbie + "</td><td><button type='button' class=' delete btn btn-danger'  dataid='" + value.id + "'>Delete</button>&nbsp;<button type='button' dataid='" + value.id + "' class='update btn btn-success' data-toggle='modal' data-target='#exampleModal'>Update</button></td></tr>";
 						});
+						alert("data updated sucessfully");
 						$('.table').html(display);
 						window.location.reload();
 					},
 					error: function(data) {
+						// console.log(data);
 						var errors = $.parseJSON(data.responseText);
-
 						$.each(errors.errors, function(key, value) {
 							console.log(key);
 							console.log(value);
@@ -457,29 +492,6 @@
 					}
 				});
 			}
-
-		});
-
-		$(document).on('keyup', '#search', function() {
-			data = $(this).val();
-			$.ajax({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				},
-				url: '{{route("search")}}',
-				type: 'get',
-				data: {
-					data: data
-				},
-				success: function(data) {
-					var display = "";
-					$.each(data, function(key, value) {
-						display += "<tr><td>" + value.id + "</td><td>" + value.name + "</td><td>" + value.emil + "</td><td>" + value.city + "</td><td>" + value.address + "</td><td>" + value.gender + "</td><td>" + value.hobbie + "</td><td><button type='button' class='delete btn btn-danger'  dataid='" + value.id + "'>Delete</button><button type='button' dataid='" + value.id + "' class='update btn btn-success'>Update</button></td></tr>";
-
-					});
-					$('.table').html(display);
-				}
-			});
 
 		});
 	</script>
