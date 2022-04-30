@@ -39,13 +39,14 @@
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary float-right mx-2 my-2" data-toggle="modal" data-target="#insert">Insert
 	</button>
-
+	<a href="{{route('trash')}}" class="btn btn-danger float-right mx-2 my-2" >Trash
+	</a>
 	<!-- Modal -->
 	<div class="modal fade" id="insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Registration form</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
@@ -337,10 +338,11 @@
 						alert("data inserted sucessfully");
 
 						$('.table').html(display);
-						window.location.reload();
+					
 					},
 					error: function(data) {
 						var errors = $.parseJSON(data.responseText);
+						
 						$.each(errors.errors, function(key, value) {
 							console.log(key);
 							console.log(value);
@@ -399,21 +401,18 @@
 						});
 
 					}
-
 					$('.id').val(data.id);
 					$('#update_name').val(data.name);
 					$('#update_email').val(data.emil);
 					$('#update_image').val(data.image);
 					$('#update_mobile').val(data.mobile);
-					$('#update_address').val(data.address);
+					$('#update_address').val(data.address); 
 					$('#update_gender').attr('checked', true);
 					$('#update_city').val(data.city);
 
 				}
 			});
 		});
-
-
 		$('#update_form').validate({
 			rules: {
 				update_name: {

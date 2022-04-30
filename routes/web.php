@@ -14,10 +14,14 @@ use App\Http\Controllers\UserController;
 |
 */
 
-
 Route::get('showform',[UserController::class,'showForm'])->name('showform');
 Route::post('store',[UserController::class,'store'])->name('store');
 Route::post('delete',[UserController::class,'delete'])->name('delete');
+Route::get('restore/{id}',[UserController::class,'restore'])->name('restore');
+Route::get('final_delete/{id}',[UserController::class,'final_delete'])->name('final_delete');
 Route::post('edit',[UserController::class,'edit'])->name('edit');
-Route::post('update',[UserController::class,'update'])->name('update');
+Route::put('update',[UserController::class,'update'])->name('update');
 Route::get('search',[UserController::class,'search'])->name('search');
+Route::get('/trash',[UserController::class,'trash'])->name('trash');
+Route::get('/count_comment',[UserController::class,'count_comment'])->name('count_comment');
+Route::get('/abc',[UserController::class,'abc'])->name('abc');

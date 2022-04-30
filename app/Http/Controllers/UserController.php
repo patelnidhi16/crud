@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
-use DB;
-use LDAP\Result;
+use App\Models\User;
+use App\Rules\UpperCase;
+
+
 
 class UserController extends Controller
 {
@@ -16,18 +18,18 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-    $request->validate([
-        'name' => 'required|alpha',
-        'image' => 'required',
-        'emil' => 'required|unique:students',
+        $request->validate([
+            'name' => ['required', 'alpha', new UpperCase],
+            'image' => 'required',
+            'emil' => 'required|unique:students',
             'mobile' => 'numeric|required|digits:10',
             'city' => 'required',
             'address' => 'required',
             'gender' => 'required',
         ]);
-            $detail = $request->file('image');
-            $name_of_image = $detail->getClientOriginalName();
-            $detail->storeAs('public/', $name_of_image);
+        $detail = $request->file('image');
+        $name_of_image = $detail->getClientOriginalName();
+        $detail->storeAs('public/', $name_of_image);
 
         Student::insert([
             'name' => $request->name,
@@ -40,9 +42,9 @@ class UserController extends Controller
             'hobbie' => implode(',', $request->hobbie)
 
         ]);
-       
+
         $data = Student::all();
-        
+
         return $data;
     }
 
@@ -52,21 +54,40 @@ class UserController extends Controller
         $data = Student::find($id);
         $data->delete();
         $data = Student::all();
-
         return $data;
+    }
+    public function restore($id)
+    {
+        $data = Student::withTrashed()->find($id);
+        $data->restore();
+        $data = Student::all();
+        return view('student-trash', compact('data'));
+    }
+    public function final_delete($id)
+    {
+        $data = Student::withTrashed()->find($id);
+        $data->forceDelete();
+        $data = Student::all();
+        return redirect()->route('trash');
     }
 
     public function edit(Request $request)
-    { 
+    {
         $id = $request->id;
         $edit_data = Student::find($id);
         return $edit_data;
+    }
+    public function trash()
+    {
+        $data = Student::onlyTrashed()->get();
+
+        return view('student-trash', compact('data'));
     }
 
     public function update(Request $request)
     {
         // dd($name_of_update_image);
-        
+
         $result['status'] = false;
         $id = $request->id;
         $request->validate([
@@ -98,4 +119,13 @@ class UserController extends Controller
         // dd($data);
         return $result;
     }
+
+    public function abc()
+    {
+        $users = User::withCount('posts', 'comments')->get();
+        dd($users);
+        return view('users', compact('users'));
+    }
+   
+    
 }
